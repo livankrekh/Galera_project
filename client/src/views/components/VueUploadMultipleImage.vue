@@ -402,9 +402,9 @@ export default {
     upload() {
       console.log('upload', this.images)
       // Upload image api
-      // axios.post('http://your-url-upload', { data: this.images }).then(response => {
-      //   console.log(response)
-      // })
+      axios.post('localhost:5000/predict', { data: this.images }).then(response => {
+        console.log(response)
+      })
     },
     preventEvent (e) {
       e.preventDefault()
