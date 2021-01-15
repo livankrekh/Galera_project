@@ -42,30 +42,7 @@ import Menu4 from "./Navigation/Menu4";
 import Menu5 from "./Navigation/Menu5";
 import Menu6 from "./Navigation/Menu6";
 
-export default {
-  components: {
-    BaseNav,
-    CloseButton,
-    Menu1,
-    Menu2,
-    Menu3,
-    Menu4,
-    Menu5,
-    Menu6
-  },
-  data() {
-    return {
-      menus: [
-        { type: "default", menuComponent: Menu1 },
-        { type: "primary", menuComponent: Menu2 },
-        { type: "success", menuComponent: Menu3 },
-        { type: "danger", menuComponent: Menu4 },
-        { type: "warning", menuComponent: Menu5 },
-        { type: "info", menuComponent: Menu6 }
-      ]
-    };
-  }
-};
+
 </script>
 <style>
 </style>

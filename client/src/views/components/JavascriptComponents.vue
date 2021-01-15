@@ -80,19 +80,7 @@ import TabsSection from "./JavascriptComponents/TabsSection";
 import ProgressSection from "./JavascriptComponents/ProgressPagination";
 import Typography from "./JavascriptComponents/Typography";
 
-export default {
-  components: {
-    DatePickers,
-    Images,
-    Modals,
-    TabPane,
-    Tabs,
-    TabsSection,
-    ProgressSection,
-    Typography,
-    Tooltips
-  }
-};
+
 </script>
 <style>
 </style>

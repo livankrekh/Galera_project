@@ -14,41 +14,7 @@
 import VueUploadMultipleImage from './VueUploadMultipleImage.vue'
 // eslint-disable-next-line no-unused-vars
 import axios from 'axios'
-export default {
-  name: 'ImageUploader',
-  data () {
-    return {
-      images: []
-    }
-  },
-  components: {
-    VueUploadMultipleImage
-  },
-  methods: {
-    uploadImageSuccess(formData, index, fileList) {
-      console.log('data', formData, index, fileList)
-      // Upload image api
-      // axios.post('http://your-url-upload', { data: formData }).then(response => {
-      //   console.log(response)
-      // })
-    },
-    beforeRemove (index, done, fileList) {
-      console.log('index', index, fileList)
-      var r = confirm("remove image")
-      if (r == true) {
-        done()
-        // eslint-disable-next-line no-empty
-      } else {
-      }
-    },
-    editImage (formData, index, fileList) {
-      console.log('edit data', formData, index, fileList)
-    },
-    dataChange (data) {
-      console.log(data)
-    }
-  }
-}
+
 </script>
 
 <style>
