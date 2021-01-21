@@ -15,10 +15,10 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "components",
+      name: "upload",
       components: {
         header: AppHeader,
-        default: Components,
+        default: Upload,
         footer: AppFooter
       }
     },

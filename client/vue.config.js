@@ -11,10 +11,10 @@ module.exports = {
   },
   pwa: {
     name: 'Kyocera',
-    themeColor: '#172b4d',
-    msTileColor: '#172b4d',
+    themeColor: '#e0011c',
+    msTileColor: '#e0011c',
     appleMobileWebAppCapable: 'yes',
-    appleMobileWebAppStatusBarStyle: '#172b4d'
+    appleMobileWebAppStatusBarStyle: '#e0011c'
   },
   css: {
     // Enable CSS source maps.

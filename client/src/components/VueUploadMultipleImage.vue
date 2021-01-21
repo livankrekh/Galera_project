@@ -263,16 +263,6 @@
           :disabled="disabled"
       >
     </div>
-
-    <vue-image-lightbox-carousel
-        ref="lightbox"
-        :show="showLightbox"
-        @close="showLightbox = false"
-        :images="images"
-        @change="changeHighlight"
-        :showCaption="false"
-    >
-    </vue-image-lightbox-carousel>
   </div>
 </template>
 
@@ -367,8 +357,7 @@ export default {
     }
   },
   components: {
-    Popper,
-    VueImageLightboxCarousel
+    Popper
   },
   computed: {
     imagePreview () {
