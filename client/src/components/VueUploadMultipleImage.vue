@@ -9,15 +9,14 @@
       @dragleave="preventEvent"
       @drop="preventEvent"
   >
+    //square
     <div
         class="image-container position-relative text-center"
-        v-if="!images.length"
-    >
+        v-if="!images.length">
       <div
           class="drag-upload-cover position-absolute"
           v-if="isDragover"
-          @drop="onDrop"
-      >
+          @drop="onDrop">
         <div class="centered full-width text-center text-primary">
           <svg
               class="icon-drag-drop"
@@ -62,8 +61,7 @@
 
     <div
         class="image-container position-relative text-center image-list"
-        v-else
-    >
+        v-else>
       <div
           class="drag-upload-cover position-absolute"
           v-if="isDragover"
@@ -204,26 +202,22 @@
 
     <div
         class="image-list-container display-flex flex-wrap"
-        v-if="images.length && multiple"
-    >
+        v-if="images.length && multiple">
       <div
           class="image-list-item position-relative cursor-pointer"
           :class="image.highlight && 'image-highlight'"
           v-for="(image, index) in images"
           :key="index"
-          @click="changeHighlight(index)"
-      >
+          @click="changeHighlight(index)">
         <div class="centered">
           <img
               class="show-img img-responsive"
-              :src="image.path"
-          >
+              :src="image.path">
         </div>
       </div>
       <div
           class="image-list-item position-relative cursor-pointer display-flex justify-content-center align-items-center"
-          v-if="(images.length < maxImage) && showAdd"
-      >
+          v-if="(images.length < maxImage) && showAdd">
         <svg
             class="icon add-image-svg"
             xmlns="http://www.w3.org/2000/svg"
@@ -242,6 +236,7 @@
         </div>
       </div>
     </div>
+    //DO NOT TOUCH
     <div>
       <input
           class="display-none"
@@ -487,21 +482,6 @@ export default {
       })
       this.images = arr
     },
-    markIsPrimary (currentIndex) {
-      this.images.map((item, index) => {
-        if (currentIndex === index) {
-          item.highlight = 1
-          item.default = 1
-        } else {
-          item.highlight = 0
-          item.default = 0
-        }
-        return item
-      })
-      this.currentIndexImage = 0
-      this.images = orderBy(this.images, 'default', 'desc')
-      this.$emit('mark-is-primary', currentIndex, this.images)
-    },
     deleteImage (currentIndex) {
       this.$emit('before-remove', currentIndex, () => {
         if (this.images[currentIndex].default === 1) {
@@ -513,10 +493,6 @@ export default {
           this.images[0].highlight = 1
         }
       }, this.images)
-    },
-    openGallery (index) {
-      this.showLightbox = true
-      this.$refs.lightbox.showImage(index)
     },
     onOpenedLightBox (value) {
       if (value) {
