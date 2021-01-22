@@ -81,10 +81,9 @@
           @dragover.prevent="onDragover"
       >
         <div class="preview-image full-width position-relative cursor-pointer">
-          <div class="image-overlay position-relative full-width full-height"></div>
-          <div class="image-overlay-details full-width full-height">
+          <div class="image-overlay position-relative full-width full-height" v-if="!isProcessing"></div>
+          <div class="image-overlay-details full-width full-height" v-if="!isProcessing">
             <label
-                v-if="showEdit"
                 class="cursor-pointer full-width full-height "
                 :for="idEdit">
               <svg
@@ -101,7 +100,7 @@
             <img
                 class="show-img img-responsive"
                 :src="imagePreview"
-            >
+                alt="image">
           </div>
         </div>
       </div>
@@ -129,19 +128,37 @@
     </div>
     <div class="flex mt-4" v-if="images.length">
       <button
+          v-if="isUploadState"
           type="button"
           class="btn btn-primary"
           v-on:click="upload">アップロード</button>
+      <button
+          v-if="isDetectionState"
+          type="button"
+          class="btn btn-primary"
+          v-on:click="detect">認識</button>
       <button
           type="button"
           class="btn btn-primary"
           @click.prevent="deleteImage(currentIndexImage)">取り消し</button>
     </div>
+    <div class="processing-cover position-absolute" v-if="isProcessing">
+      <div class="centered full-width text-center text-primary">
+        <div v-if="isUploading || isDetection ">
+          <img class="icon-drag-drop" src="img/icons/process.gif"/>
+          <h4 class="drop-text-here" v-if="isUploading">アップロード中</h4>
+          <h4 class="drop-text-here" v-if="isDetection">認識中</h4>
+        </div>
+        <div class="alert alert-danger mt-4" v-if="isBadUpload">アップロード失敗</div>
+        <div class="alert alert-danger mt-4" v-if="isBadDetection">認識失敗</div>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
-import { forEach, findIndex, orderBy, cloneDeep } from 'lodash'
+import { forEach, findIndex, cloneDeep } from 'lodash'
 import Popper from 'vue-popperjs'
 import 'vue-popperjs/dist/css/vue-popper.css'
 import axios from "axios";
@@ -152,27 +169,15 @@ export default {
   props: {
     dragText: {
       type: String,
-      default: 'Drag images (multiple)'
+      default: '画像をドラッグ'
     },
     browseText: {
       type: String,
-      default: '(or) Select'
-    },
-    primaryText: {
-      type: String,
-      default: 'Default'
-    },
-    markIsPrimaryText: {
-      type: String,
-      default: 'Set as Default'
-    },
-    popupText: {
-      type: String,
-      default: 'This image will be displayed as default'
+      default: 'または選択'
     },
     dropText: {
       type: String,
-      default: 'Drop your file here ...'
+      default: 'ファイルをこちらにドロップしてください。'
     },
     accept: {
       type: String,
@@ -204,14 +209,6 @@ export default {
       type: String,
       default: 'image-edit'
     },
-    showEdit: {
-      type: Boolean,
-      default: true
-    },
-    showDelete: {
-      type: Boolean,
-      default: true
-    },
     disabled: {
       type: Boolean,
       default: false
@@ -221,7 +218,14 @@ export default {
     return {
       currentIndexImage: 0,
       images: [],
-      isDragover: false
+      isDragover: false,
+      isProcessing: false,
+      isUploading: false,
+      isBadUpload: false,
+      isDetection: false,
+      isBadDetection:false,
+      isUploadState: true,
+      isDetectionState: false,
     }
   },
   components: {
@@ -245,11 +249,78 @@ export default {
   },
   methods: {
     upload() {
+      this.isProcessing = true
+      this.isUploading = true
       console.log('upload', this.images)
       // Upload image api
       axios.post('localhost:5000/predict', { data: this.images }).then(response => {
-        console.log(response)
+        this.isUploading = false
+        // console.log(response)
+        if(true) {
+          console.log("成功")
+          this.isUploadState = false
+          this.isDetectionState = true
+        }
+        else {
+          console.log("失敗")
+          this.isBadUpload = true
+        }
       })
+      //FOR TEST
+      setTimeout(() => {
+      if(true) {
+        console.log("成功")
+        this.isProcessing = false
+        this.isUploading = false
+        this.isUploadState = false
+        this.isDetectionState = true
+      }
+      else {
+        console.log("失敗")
+        this.isUploading = false
+        this.isBadUpload = true
+        setTimeout(() => {
+            this.isProcessing = false
+          this.isBadUpload = false
+           }, 2000)
+      } }, 2000);
+    },
+    detect() {
+      this.isProcessing = true
+      this.isDetection = true
+      // console.log('upload', this.images)
+      // Detection image api
+      // axios.post('localhost:5000/predict', { data: this.images }).then(response => {
+      //   this.isUploading = false
+      //   // console.log(response)
+      //   if(true) {
+      //     console.log("成功")
+      //     this.isUploadState = false
+      //     this.isDetectionState = true
+      //   }
+      //   else {
+      //     console.log("失敗")
+      //     this.isBadUpload = true
+      //   }
+      // })
+      //FOR TEST
+      setTimeout(() => {
+        if(false) {
+          console.log("成功")
+          this.isProcessing = false
+          this.isDetection = false
+          this.isDetectionState = false
+
+        }
+        else {
+          console.log("失敗")
+          this.isDetection = false
+          this.isBadDetection = true
+          setTimeout(() => {
+            this.isProcessing = false
+            this.isBadDetection = false
+          }, 2000)
+        } }, 2000);
     },
     preventEvent (e) {
       e.preventDefault()
@@ -261,9 +332,6 @@ export default {
       e.preventDefault()
       let files = e.dataTransfer.files
       if (!files.length) {
-        return false
-      }
-      if (!this.isValidNumberOfImages(files.length)) {
         return false
       }
       // eslint-disable-next-line no-unused-vars
@@ -321,9 +389,6 @@ export default {
       if (!files.length) {
         return false
       }
-      if (!this.isValidNumberOfImages(files.length)) {
-        return false
-      }
       // eslint-disable-next-line no-unused-vars
       forEach(files, (value, index) => {
         this.createImage(value)
@@ -337,10 +402,6 @@ export default {
       if (!files.length) {
         return false
       }
-      if (!this.isValidNumberOfImages(files.length)) {
-        return false
-      }
-      // eslint-disable-next-line no-unused-vars
       forEach(files, (value, index) => {
         this.editImage(value)
       })
@@ -349,8 +410,8 @@ export default {
       }
     },
     deleteImage (currentIndex) {
-      var r = confirm("remove image")
-      if (r == true) {
+      let r = confirm("画像を取り消しますか？")
+      if (r === true) {
         if (this.images[currentIndex].default === 1) {
           this.images[0].default = 1
         }
@@ -362,18 +423,6 @@ export default {
       } else {
       }
     },
-    openGallery (index) {
-      console.log("edit")
-      this.editImage(index)
-    },
-    isValidNumberOfImages (amount) {
-      if (amount > this.maxImage) {
-        this.$emit('limit-exceeded', amount)
-        return false
-      } else {
-        return true
-      }
-    }
   },
   watch: {
     dataImages: {
@@ -387,6 +436,7 @@ export default {
     document.body.addEventListener('dragleave', (event) => {
       event.stopPropagation()
       event.preventDefault()
+      console.log("false")
       this.isDragover = false
     })
   },
@@ -497,6 +547,16 @@ export default {
   z-index: 1;
   margin: 5px;
   border: 2px dashed #268ddd;
+}
+.processing-cover {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fcfeff;
+  opacity: 0.9;
+  z-index: 20;
+  margin: 5px;
 }
 .drag-upload-cover {
   font-weight: 400;
