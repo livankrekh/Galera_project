@@ -7,8 +7,8 @@
       @dragover="preventEvent"
       @dragenter="preventEvent"
       @dragleave="preventEvent"
-      @drop="preventEvent"
-  >
+      @drop="preventEvent">
+    <div class="d-flex flex-row">
     <div
         class="image-container position-relative text-center"
         v-if="!images.length">
@@ -20,8 +20,7 @@
           <svg
               class="icon-drag-drop"
               xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512"
-          >
+              viewBox="0 0 512 512">
             <path d="M444.5 15C407.7 15 378 44.8 378 81.5s29.8 66.5 66.5 66.5S511 118.2 511 81.5 481.2 15 444.5 15zm29.4 72.4h-23.5l.1 25.9c0 3.2-2.6 5.8-5.8 5.9-3.2 0-5.8-2.6-5.8-5.8l-.1-26h-23.6c-3.2 0-5.8-2.6-5.8-5.8s2.6-5.8 5.8-5.8h23.5l-.1-25.9c0-3.2 2.6-5.8 5.8-5.9 3.2 0 5.8 2.6 5.8 5.8l.1 26h23.6c3.3 0 5.8 2.6 5.8 5.8s-2.6 5.8-5.8 5.8zM199.3 191.3c21.5 0 38.9 17.6 38.9 39.3s-17.4 39.3-38.9 39.3-38.9-17.6-38.9-39.3c0-21.7 17.5-39.3 38.9-39.3zm185.4 201.3H86.3c-6.5 0-11.9-5.3-11.9-11.9v-32.4c0-2.5.7-4.8 2.1-6.9l41.3-58.4c3.7-5.2 10.8-6.5 16.1-3.1l56.4 36.8c4.5 3 10.3 2.5 14.4-1L313 220.1c5.1-4.5 13.1-3.8 17.2 1.7l61.5 79.7c1.6 2 2.5 4.6 2.5 7.2v74.4c0 5.2-4.3 9.5-9.5 9.5zm7.9 117.6h-58.8v-12h58.8v12zm-78.4 0h-58.8v-12h58.8v12zm-78.5 0h-58.8v-12h58.8v12zm-78.4 0H98.4v-12h58.8v12h.1zm-78.5 0H57.7c-14.3 0-27.9-5.4-38.3-15.3l8.3-8.7c8.2 7.8 18.8 12 30.1 12h21.1l-.1 12zm333.6-.1l-.3-12c17.8-.4 33.4-11.5 39.8-28.2l11.2 4.3c-8.1 21.3-28 35.4-50.7 35.9zM6.8 477c-3.2-7.1-4.7-14.7-4.7-22.5v-38.2h12v38.2c0 6.1 1.3 12.1 3.7 17.6l-11 4.9zm459.9-24.1h-12v-58.8h12v58.8zM14.1 396.7h-12v-58.8h12v58.8zm452.6-22.3h-12v-58.8h12v58.8zM14.1 318.3h-12v-58.8h12v58.8zM466.7 296h-12v-58.8h12V296zM14.1 239.8h-12V181h12v58.8zm452.6-22.2h-12v-58.8h12v58.8zM14.1 161.4h-12v-58.8h12v58.8zm2.4-76.1L5.3 81.2C13 59.9 33.4 45.5 56.1 45.5h.2v12h-.2c-17.7 0-33.6 11.2-39.6 27.8zm353.6-27.8h-58.8v-12h58.8v12zm-78.5 0h-58.8v-12h58.8v12zm-78.4 0h-58.8v-12h58.8v12zm-78.5 0H75.9v-12h58.8v12z"></path>
           </svg>
           <h4 class="drop-text-here"><b>{{dropText}}</b></h4>
@@ -63,14 +62,12 @@
       <div
           class="drag-upload-cover position-absolute"
           v-if="isDragover"
-          @drop="onDrop"
-      >
+          @drop="onDrop">
         <div class="centered full-width text-center text-primary">
           <svg
               class="icon-drag-drop"
               xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512"
-          >
+              viewBox="0 0 512 512">
             <path d="M444.5 15C407.7 15 378 44.8 378 81.5s29.8 66.5 66.5 66.5S511 118.2 511 81.5 481.2 15 444.5 15zm29.4 72.4h-23.5l.1 25.9c0 3.2-2.6 5.8-5.8 5.9-3.2 0-5.8-2.6-5.8-5.8l-.1-26h-23.6c-3.2 0-5.8-2.6-5.8-5.8s2.6-5.8 5.8-5.8h23.5l-.1-25.9c0-3.2 2.6-5.8 5.8-5.9 3.2 0 5.8 2.6 5.8 5.8l.1 26h23.6c3.3 0 5.8 2.6 5.8 5.8s-2.6 5.8-5.8 5.8zM199.3 191.3c21.5 0 38.9 17.6 38.9 39.3s-17.4 39.3-38.9 39.3-38.9-17.6-38.9-39.3c0-21.7 17.5-39.3 38.9-39.3zm185.4 201.3H86.3c-6.5 0-11.9-5.3-11.9-11.9v-32.4c0-2.5.7-4.8 2.1-6.9l41.3-58.4c3.7-5.2 10.8-6.5 16.1-3.1l56.4 36.8c4.5 3 10.3 2.5 14.4-1L313 220.1c5.1-4.5 13.1-3.8 17.2 1.7l61.5 79.7c1.6 2 2.5 4.6 2.5 7.2v74.4c0 5.2-4.3 9.5-9.5 9.5zm7.9 117.6h-58.8v-12h58.8v12zm-78.4 0h-58.8v-12h58.8v12zm-78.5 0h-58.8v-12h58.8v12zm-78.4 0H98.4v-12h58.8v12h.1zm-78.5 0H57.7c-14.3 0-27.9-5.4-38.3-15.3l8.3-8.7c8.2 7.8 18.8 12 30.1 12h21.1l-.1 12zm333.6-.1l-.3-12c17.8-.4 33.4-11.5 39.8-28.2l11.2 4.3c-8.1 21.3-28 35.4-50.7 35.9zM6.8 477c-3.2-7.1-4.7-14.7-4.7-22.5v-38.2h12v38.2c0 6.1 1.3 12.1 3.7 17.6l-11 4.9zm459.9-24.1h-12v-58.8h12v58.8zM14.1 396.7h-12v-58.8h12v58.8zm452.6-22.3h-12v-58.8h12v58.8zM14.1 318.3h-12v-58.8h12v58.8zM466.7 296h-12v-58.8h12V296zM14.1 239.8h-12V181h12v58.8zm452.6-22.2h-12v-58.8h12v58.8zM14.1 161.4h-12v-58.8h12v58.8zm2.4-76.1L5.3 81.2C13 59.9 33.4 45.5 56.1 45.5h.2v12h-.2c-17.7 0-33.6 11.2-39.6 27.8zm353.6-27.8h-58.8v-12h58.8v12zm-78.5 0h-58.8v-12h58.8v12zm-78.4 0h-58.8v-12h58.8v12zm-78.5 0H75.9v-12h58.8v12z"></path>
           </svg>
           <h4 class="drop-text-here"><b>{{dropText}}</b></h4>
@@ -78,8 +75,7 @@
       </div>
       <div
           v-else
-          @dragover.prevent="onDragover"
-      >
+          @dragover.prevent="onDragover">
         <div class="preview-image full-width position-relative cursor-pointer">
           <div class="image-overlay position-relative full-width full-height" v-if="!isProcessing"></div>
           <div class="image-overlay-details full-width full-height" v-if="!isProcessing">
@@ -114,8 +110,7 @@
           :multiple="multiple"
           :accept="accept"
           type="file"
-          :disabled="disabled"
-      >
+          :disabled="disabled">
       <input
           class="display-none"
           :id="idEdit"
@@ -123,9 +118,18 @@
           name="image"
           :accept="accept"
           type="file"
-          :disabled="disabled"
-      >
+          :disabled="disabled">
     </div>
+      <div class="image-container position-relative text-center image-list" v-if="isOneResultState">
+        <div>認識結果</div>
+        <div>認識情報</div>
+      </div>
+      <div class="image-container position-relative text-center image-list" v-if="isSeveralResultState">
+        <div>認識結果</div>
+        <div>認識情報</div>
+      </div>
+  </div>
+    <!--Buttons panel-->
     <div class="flex mt-4" v-if="images.length">
       <button
           v-if="isUploadState"
@@ -133,27 +137,46 @@
           class="btn btn-primary"
           v-on:click="upload">アップロード</button>
       <button
+          v-if="isOneResultState || isSeveralState"
+          type="button"
+          class="btn btn-primary"
+          v-on:click="set">確定</button>
+      <button
           v-if="isDetectionState"
           type="button"
           class="btn btn-primary"
           v-on:click="detect">認識</button>
       <button
+          v-if="isOneResultState"
+          type="button"
+          class="btn btn-primary"
+          v-on:click="redetect">再認識</button>
+      <button
+          v-if="isSeveralState"
+          type="button"
+          class="btn btn-primary"
+          v-on:click="redetect">手動入力</button>
+      <button
           type="button"
           class="btn btn-primary"
           @click.prevent="deleteImage(currentIndexImage)">取り消し</button>
     </div>
+    <!--Alert-->
     <div class="processing-cover position-absolute" v-if="isProcessing">
       <div class="centered full-width text-center text-primary">
-        <div v-if="isUploading || isDetection ">
+        <div v-if="isUploading || isDetection || isRedetection">
           <img class="icon-drag-drop" src="img/icons/process.gif"/>
           <h4 class="drop-text-here" v-if="isUploading">アップロード中</h4>
           <h4 class="drop-text-here" v-if="isDetection">認識中</h4>
+          <h4 class="drop-text-here" v-if="isRedetection">再認識中</h4>
+          <h4 class="drop-text-here" v-if="isManualInputting">手動入力中</h4>
         </div>
         <div class="alert alert-danger mt-4" v-if="isBadUpload">アップロード失敗</div>
         <div class="alert alert-danger mt-4" v-if="isBadDetection">認識失敗</div>
+        <div class="alert alert-danger mt-4" v-if="isBadRedetection">再認識失敗</div>
+        <div class="alert alert-danger mt-4" v-if="isManualInputtingFailure">手動入力失敗</div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -224,8 +247,15 @@ export default {
       isBadUpload: false,
       isDetection: false,
       isBadDetection:false,
+      isRedetection: false,
+      isBadRedetection:false,
+      isManualInputting: false,
+      isManualInputtingFailure: false,
       isUploadState: true,
       isDetectionState: false,
+      isOneResultState: false,
+      isSeveralResultState: false,
+      isManualInputState: false
     }
   },
   components: {
@@ -305,12 +335,12 @@ export default {
       // })
       //FOR TEST
       setTimeout(() => {
-        if(false) {
+        if(true) {
           console.log("成功")
           this.isProcessing = false
           this.isDetection = false
           this.isDetectionState = false
-
+          this.isOneResultState = true
         }
         else {
           console.log("失敗")
@@ -322,6 +352,31 @@ export default {
           }, 2000)
         } }, 2000);
     },
+    set() {
+
+    },
+    redetect() {
+      this.isProcessing = true
+      this.isRedetection = true
+      setTimeout(() => {
+        if(true) {
+          console.log("成功")
+          this.isProcessing = false
+          this.isRedetection = false
+          this.isOneResultState = false
+          this.isSeveralState = true
+        }
+        else {
+          console.log("失敗")
+          this.isDetection = false
+          this.isBadRedetection = true
+          setTimeout(() => {
+            this.isProcessing = false
+            this.isBadRedetection = false
+          }, 2000)
+        } }, 2000);
+    },
+
     preventEvent (e) {
       e.preventDefault()
       e.stopPropagation()
