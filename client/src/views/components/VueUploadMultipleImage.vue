@@ -120,13 +120,28 @@
           type="file"
           :disabled="disabled">
     </div>
-      <div class="image-container position-relative text-center image-list" v-if="isOneResultState">
-        <div>認識結果</div>
-        <div>認識情報</div>
+      <div class="ml-3 p-2 position-relative  image-list container block-container" style="width: 500px" v-if="isOneResultState">
+        <div class="text-center">認識結果</div>
+        <div class="d-flex text-left ">
+          <div class="mr-3">
+            <div>Brand</div>
+            <div>Brand2</div>
+            <div>Brand2</div>
+            <div>Brand2</div>
+            <div>Brand2</div>
+          </div>
+          <div class="flex-wrap">
+            <div class="flex-grow-1">Brand</div>
+            <div class="flex-grow-1">Branddsihvikjdfbisdbfsuidbfsdiubfsd</div>
+            <div class="flex-grow-1">Brandsjndfkjsbfoiusdbjsdhbfdjusbfsjdbfjsdhbfjsdbfsd</div>
+            <div class="flex-grow-1">Brand</div>
+            <div class="flex-grow-1">Brand</div>
+          </div>
+        </div>
       </div>
-      <div class="image-container position-relative text-center image-list" v-if="isSeveralResultState">
-        <div>認識結果</div>
-        <div>認識情報</div>
+      <div class="p-2 position-relative text-center image-list container block-container" v-if="isSeveralResultState">
+        <div class="my-1">認識結果</div>
+        <div class="my-1">認識情報</div>
       </div>
   </div>
     <!--Buttons panel-->
@@ -137,7 +152,7 @@
           class="btn btn-primary"
           v-on:click="upload">アップロード</button>
       <button
-          v-if="isOneResultState || isSeveralState"
+          v-if="isOneResultState || isSeveralResultState"
           type="button"
           class="btn btn-primary"
           v-on:click="set">確定</button>
@@ -152,7 +167,7 @@
           class="btn btn-primary"
           v-on:click="redetect">再認識</button>
       <button
-          v-if="isSeveralState"
+          v-if="isSeveralResultState"
           type="button"
           class="btn btn-primary"
           v-on:click="redetect">手動入力</button>
@@ -562,6 +577,11 @@ export default {
   border-radius: 4px;
   background-color: #fff;
 }
+.block-container {
+  border: 1px solid #d6d6d6;
+  border-radius: 4px;
+  background-color: #fff;
+}
 .image-center {
   width: 100%;
   height: 100%;
@@ -640,6 +660,7 @@ export default {
   border-radius: 15px;
   box-sizing: border-box;
 }
+
 .image-overlay {
   background: rgba(0, 0, 0, 0.7);
   z-index: 10;

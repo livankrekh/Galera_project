@@ -1,6 +1,8 @@
 .footer {
-    background: $footer-bg;
     padding: 3rem 0;
+    position: absolute;
+    bottom: 0;
+    width:100%;
     //color: $footer-color;
 
     .col-footer {

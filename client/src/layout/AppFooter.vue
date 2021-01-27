@@ -1,8 +1,8 @@
 <template>
-    <footer class="footer has-cards">
-        <div class="container">
-            <hr>
-            <div class="row align-items-center justify-content-md-between">
+    <footer class="footer">
+        <div class=" container">
+            <hr class="border-white">
+            <div class="row align-items-center justify-content-md-between text-white">
                 <div class="col-md-6">
                     <div class="copyright">
                         &copy; {{year}}
