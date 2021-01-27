@@ -1,5 +1,5 @@
 <template>
-    <section class="section section-shaped section-lg my-0">
+    <section class="section section-shaped section-lg my-0 screen-height">
         <div class="shape shape-style-1 background-gradient">
             <span></span>
             <span></span>
@@ -11,7 +11,7 @@
             <span></span>
         </div>
             <div class="row justify-content-center">
-                <div id="uploadPanel" class="col-lg-5 text-center">
+                <div id="uploadPanel" class="container text-center">
 <!--                  <div class="col-lg-7 text-center pt-lg">-->
                     <p class="caption text-white mt-4 mb-5">オンライン商品認識システム</p>
 <!--                  </div>-->
@@ -52,5 +52,8 @@ export default {
   -ms-filter: blur(5px);
   filter: blur(5px);
   background-color: #ccc;
+}
+.screen-height {
+  height: 100vh;
 }
 </style>
