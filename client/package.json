@@ -22,7 +22,8 @@
     "axios": "^0.18.0",
     "lodash": "^4.17.11",
     "vue-image-lightbox-carousel": "^1.0.7",
-    "vue-popperjs": "^1.5.3"
+    "vue-popperjs": "^1.5.3",
+    "@vuenique/vue-vibrancy": "^1.0.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.4.0",
