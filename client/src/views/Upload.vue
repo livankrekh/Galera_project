@@ -13,27 +13,25 @@
             <div class="row justify-content-center">
                 <div id="uploadPanel" class="container text-center">
 <!--                  <div class="col-lg-7 text-center pt-lg">-->
-                    <p class="caption text-white mt-4 mb-5">オンライン商品認識システム</p>
+                    <h1 class="text-white mt-4 mb-5">オンライン商品認識システム</h1>
 <!--                  </div>-->
-                    <card type="secondary" shadow
-                          header-classes="bg-white pb-5"
-                          body-classes="px-lg-5 py-lg-5"
-                          class="border-0">
                        <vue-upload-multiple-image
+                           class="px-lg-5 py-lg-5"
                            style="display: flex;
                            justify-content: center;
                            flex-direction: column;
                            align-items: center;"/>
-                    </card>
                 </div>
             </div>
     </section>
 </template>
 <script>
+// import * as Vibrant from 'node-vibrant'
 import VueUploadMultipleImage from '@/views/components/VueUploadMultipleImage.vue'
 export default {
   components: {VueUploadMultipleImage}
 };
+
 </script>
 <style>
 .background-gradient {
