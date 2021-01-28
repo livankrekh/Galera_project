@@ -2,11 +2,11 @@
 FROM node:14.15.3
 
 # set working directory
-WORKDIR client/app
+WORKDIR /app
 
-COPY /client/package.json package.json
+COPY package.json package.json
 RUN npm install
-COPY /client .
+COPY . .
 RUN npm install @vue/cli@4.5.10 -g
 
 # start app
