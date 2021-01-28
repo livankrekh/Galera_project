@@ -301,7 +301,7 @@ export default {
       this.state=State.IMAGE_UPLOADING
       console.log('upload', this.images)
       // Upload image api
-      axios.post('localhost:5000/predict', { data: this.images }).then(response => {
+      axios.post('http://localhost:5000/predict', { data: this.images }).then(response => {
         // console.log(response)
         if(true) {
           console.log("成功")
@@ -310,21 +310,24 @@ export default {
         else {
           console.log("失敗")
           this.state=State.IMAGE_UPLOADING_FAILED
+          setTimeout(() => {
+            this.state = State.IMAGE_SELECTED
+          }, 2000)
         }
       })
       //FOR TEST
-      setTimeout(() => {
-      if(true) {
-        console.log("成功")
-        this.state=State.RECOGNITION_IDLE
-      }
-      else {
-        console.log("失敗")
-        this.state=State.IMAGE_UPLOADING_FAILED
-        setTimeout(() => {
-            this.state = State.IMAGE_SELECTED
-           }, 2000)
-      } }, 2000);
+      // setTimeout(() => {
+      // if(true) {
+      //   console.log("成功")
+      //   this.state=State.RECOGNITION_IDLE
+      // }
+      // else {
+      //   console.log("失敗")
+      //   this.state=State.IMAGE_UPLOADING_FAILED
+      //   setTimeout(() => {
+      //       this.state = State.IMAGE_SELECTED
+      //      }, 2000)
+      // } }, 2000);
     },
     detect() {
       this.state=State.RECOGNITION
