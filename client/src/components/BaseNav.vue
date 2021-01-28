@@ -14,17 +14,11 @@
                     {{title}}
                 </a>
             </slot>
-            <navbar-toggle-button :toggled="toggled"
-                                  :target="contentId"
-                                  @click.native.stop="toggled = !toggled">
-            </navbar-toggle-button>
 
             <slot name="container-after"></slot>
 
-            <div class="collapse navbar-collapse" :class="{show: toggled}" :id="contentId" v-click-outside="closeMenu">
-                <div class="navbar-collapse-header">
+            <div class="collapse navbar-collapse"  :id="contentId" v-click-outside="closeMenu">
                     <slot name="content-header" :close-menu="closeMenu"></slot>
-                </div>
                 <slot :close-menu="closeMenu"></slot>
             </div>
         </div>

@@ -29,9 +29,8 @@
       </div>
       <!--Image-->
     <div
-        class="image-container position-relative text-center image-list"
+        class="image-container text-center"
         v-else>
-      <div v-if="!isDragover">
         <div class="preview-image full-width position-relative cursor-pointer">
           <div class="image-overlay position-relative full-width full-height"></div>
           <div class="image-overlay-details full-width full-height">
@@ -48,14 +47,11 @@
               </svg>
             </label>
           </div>
-          <div class="show-image centered">
             <img
-                class="show-img img-responsive"
+                class="show-img img-responsive centered"
                 :src="imagePreview"
                 alt="image">
-          </div>
         </div>
-      </div>
     </div>
       <!--Do not touch -->
     <div>
@@ -101,7 +97,9 @@
            style="width: 500px; height: 300px; overflow-y: auto;"
            v-if="state === State.RERECOGNITION_RESULT">
         <h3 class="text-center">再認識結果</h3>
-        <div v-for="item in items" class="d-flex text-left result_item mb-2">
+        <div v-for="item in items" class="d-flex text-left result_item mb-2"
+             v-bind:class="{ item_selected: item.isActive }"
+             @click="item.isActive=true; selectedItem.isActive=false; selectedItem=item">
           <div class="mr-3">
             <img class="show-img img-responsive p-2"
                  :src="imagePreview"
@@ -283,11 +281,12 @@ export default {
       State,
       state: State.IDLE,
       items: [
-        { message: 'Foo' },
-        { message: 'Bar' },
-        { message: 'Foo' },
-        { message: 'Bar' }
-      ]
+        { message: 'Foo', isActive: true },
+        { message: 'Bar', isActive: false },
+        { message: 'Foo', isActive: false },
+        { message: 'Bar', isActive: false }
+      ],
+      selectedItem: 0
     }
   },
   components: {
@@ -324,7 +323,9 @@ export default {
     onDragOver(e) {
       e.preventDefault();
     },
+    selectItem(e) {
 
+    },
     upload() {
       this.state=State.IMAGE_UPLOADING
       console.log('upload', this.images)
@@ -526,6 +527,7 @@ export default {
     window.addEventListener('dragleave', this.onDragLeave);
     window.addEventListener('dragover', this.onDragOver);
     window.addEventListener('drop', this.onDrop);
+    this.selectedItem = this.items[0]
   },
   beforeDestroy() {
     window.removeEventListener('dragenter', this.onDragEnter);
@@ -594,10 +596,9 @@ export default {
   display: block;
 }
 .image-container {
-  width: 190px;
-  height: 180px;
-  border: 1px dashed #d6d6d6;
-  border-radius: 4px;
+  width: 200px;
+  height: 200px;
+  border-radius: 5px;
   background-color: #fff;
 }
 .block-container {
@@ -673,8 +674,8 @@ export default {
   border: 1px solid #d6d6d6;
 }
 .preview-image {
-  height: 140px;
-  padding: 5px;
+  height: 200px;
+  width: 200px;
   border-radius: 15px;
   box-sizing: border-box;
 }
@@ -708,8 +709,8 @@ export default {
   height: auto;
 }
 .show-img {
-  max-height: 100px;
-  max-width: 140px;
+  max-height: 200px;
+  max-width: 200px;
   display: block;
   vertical-align: middle;
 }
@@ -805,6 +806,10 @@ export default {
 .result_item {
   border-radius: 25px;
   border: 2px solid #444;
+}
+
+.item_selected {
+  border: 4px solid #24b47e;
 }
 </style>
 <style lang="css">
