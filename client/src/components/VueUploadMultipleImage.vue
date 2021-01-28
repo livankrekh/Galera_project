@@ -585,7 +585,7 @@ export default {
   position: absolute;
   display: block;
 }
-.image-container {
+.mage-container {
   width: 190px;
   height: 180px;
   border: 1px dashed #d6d6d6;

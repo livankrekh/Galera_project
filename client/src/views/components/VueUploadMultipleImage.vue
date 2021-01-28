@@ -82,24 +82,46 @@
         <h3 class="text-center">認識結果</h3>
         <div class="d-flex text-left ">
           <div class="mr-3">
-            <div>Brand</div>
-            <div>Brand2</div>
-            <div>Brand2</div>
-            <div>Brand2</div>
-            <div>Brand2</div>
+            <div>項目１</div>
+            <div>項目２</div>
+            <div>項目３</div>
+            <div>項目４</div>
+            <div>項目５</div>
           </div>
           <div class="flex-wrap">
             <div class="flex-grow-1">Brand</div>
-            <div class="flex-grow-1">Branddsihvikjdfbisdbfsuidbfsdiubfsd</div>
-            <div class="flex-grow-1">Brandsjndfkjsbfoiusdbjsdhbfdjusbfsjdbfjsdhbfjsdbfsd</div>
+            <div class="flex-grow-1">Branddsihviiubfsd</div>
+            <div class="flex-grow-1">Brandsjndfkjsbfoiusdbj</div>
             <div class="flex-grow-1">Brand</div>
             <div class="flex-grow-1">Brand</div>
           </div>
         </div>
       </div>
-      <div class="p-2 position-relative text-center image-list container block-container" v-if="isSeveralResultState">
-        <div class="my-1">認識結果</div>
-        <div class="my-1">認識情報</div>
+      <div class="ml-3 p-2 position-relative image-list container block-container align-items-stretch"
+           style="width: 500px; height: 300px; overflow-y: auto;"
+           v-if="state === State.RERECOGNITION_RESULT">
+        <h3 class="text-center">再認識結果</h3>
+        <div v-for="item in items" class="d-flex text-left result_item mb-2">
+          <div class="mr-3">
+            <img class="show-img img-responsive p-2"
+                 :src="imagePreview"
+                 alt="image"/>
+          </div>
+          <div class="mr-3">
+            <div>項目１</div>
+            <div>項目２</div>
+            <div>項目３</div>
+            <div>項目４</div>
+            <div>項目５</div>
+          </div>
+          <div class="flex-wrap">
+            <div class="flex-grow-1">Brand</div>
+            <div class="flex-grow-1">Branddsihvikjdf</div>
+            <div class="flex-grow-1">Brandsjndfk</div>
+            <div class="flex-grow-1">Brand</div>
+            <div class="flex-grow-1">Brand</div>
+          </div>
+        </div>
       </div>
   </div>
 <!--    Buttons panel-->
@@ -259,7 +281,13 @@ export default {
       lastTarget: null,
       isDragover: false,
       State,
-      state: State.IDLE
+      state: State.IDLE,
+      items: [
+        { message: 'Foo' },
+        { message: 'Bar' },
+        { message: 'Foo' },
+        { message: 'Bar' }
+      ]
     }
   },
   components: {
@@ -316,36 +344,36 @@ export default {
         }
       })
       //FOR TEST
-      // setTimeout(() => {
-      // if(true) {
-      //   console.log("成功")
-      //   this.state=State.RECOGNITION_IDLE
-      // }
-      // else {
-      //   console.log("失敗")
-      //   this.state=State.IMAGE_UPLOADING_FAILED
-      //   setTimeout(() => {
-      //       this.state = State.IMAGE_SELECTED
-      //      }, 2000)
-      // } }, 2000);
+      setTimeout(() => {
+      if(true) {
+        console.log("成功")
+        this.state=State.RECOGNITION_IDLE
+      }
+      else {
+        console.log("失敗")
+        this.state=State.IMAGE_UPLOADING_FAILED
+        setTimeout(() => {
+            this.state = State.IMAGE_SELECTED
+           }, 2000)
+      } }, 2000);
     },
     detect() {
       this.state=State.RECOGNITION
-      // console.log('upload', this.images)
+      console.log('upload', this.images)
       // Detection image api
-      // axios.post('localhost:5000/predict', { data: this.images }).then(response => {
-      //   this.isUploading = false
-      //   // console.log(response)
-      //   if(true) {
-      //     console.log("成功")
-      //     this.isUploadState = false
-      //     this.isDetectionState = true
-      //   }
-      //   else {
-      //     console.log("失敗")
-      //     this.isBadUpload = true
-      //   }
-      // })
+      axios.post('localhost:5000/predict', { data: this.images }).then(response => {
+        this.isUploading = false
+        // console.log(response)
+        if(true) {
+          console.log("成功")
+          this.isUploadState = false
+          this.isDetectionState = true
+        }
+        else {
+          console.log("失敗")
+          this.isBadUpload = true
+        }
+      })
       //FOR TEST
       setTimeout(() => {
         if(true) {
@@ -774,9 +802,9 @@ export default {
   font-size: 12px;
 }
 
-.ji-modal {
-  width: 100vh;
-  height: 100vh;
+.result_item {
+  border-radius: 25px;
+  border: 2px solid #444;
 }
 </style>
 <style lang="css">
