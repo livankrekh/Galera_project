@@ -1,47 +1,21 @@
-<template>
-    <header class="header-global">
-        <base-nav class="navbar-main" transparent type="" effect="light" expand>
+<template xmlns="http://www.w3.org/1999/html">
+    <header class="header">
+      <div class="container">
           <a href="https://www.kyocera.co.jp/" class="navbar-brand mr-lg-5">
             <img src="img/brand/logo.png">
           </a>
-
-<!--            <div class="row" slot="content-header" slot-scope="{closeMenu}">-->
-<!--                <div class="col-6 collapse-brand">-->
-<!--                    <a href="https://demos.creative-tim.com/vue-argon-design-system/documentation/">-->
-<!--                        <img src="img/brand/blue.png">-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--                <div class="col-6 collapse-close">-->
-<!--                    <close-button @click="closeMenu"></close-button>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            <ul class="navbar-nav align-items-lg-center ml-lg-auto">-->
-<!--                <li class="nav-item d-none d-lg-block ml-lg-4">-->
-<!--                    <a href="https://www.kyocera.co.jp/" target="_blank" rel="noopener"-->
-<!--                       class="btn btn-neutral btn-icon">-->
-<!--&lt;!&ndash;                <span class="btn-inner&#45;&#45;icon">&ndash;&gt;-->
-<!--&lt;!&ndash;                  <i class="fa fa-cloud-download mr-2"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;                </span>&ndash;&gt;-->
-<!--                        <span class="nav-link-inner&#45;&#45;text">KYOCERA</span>-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--            </ul>-->
-        </base-nav>
+      </div>
     </header>
 </template>
 <script>
-import BaseNav from "@/components/BaseNav";
-import BaseDropdown from "@/components/BaseDropdown";
-import CloseButton from "@/components/CloseButton";
 
 export default {
-  components: {
-    BaseNav,
-    CloseButton,
-    BaseDropdown
-  }
 };
 </script>
 <style>
+.header {
+  padding-top: 2rem;
+  position: absolute;
+  width: 100%;
+}
 </style>
