@@ -2,16 +2,12 @@
     <section class="section-shaped my-0 screen-height screen-section">
         <div class="shape shape-style-1 background-gradient"/>
             <div class="justify-content-center substrate">
-                <div id="uploadPanel" class="container text-center">
+                <div id="uploadPanel" class="px-3 text-center">
 <!--                  <div class="col-lg-7 text-center pt-lg">-->
-                    <h1 class="mt-4 mb-5 caption">オンライン商品認識システム</h1>
+                    <h1 class="mt-4 caption">オンライン商品認識システム</h1>
 <!--                  </div>-->
                        <vue-upload-multiple-image
-                           class="px-lg-5 py-lg-5"
-                           style="display: flex;
-                           justify-content: center;
-                           flex-direction: column;
-                           align-items: center;"/>
+                           style=""/>
                 </div>
             </div>
     </section>
@@ -39,7 +35,7 @@ body {
   opacity: 0.66;
 }
 .screen-section {
-  padding-top: 3.5rem;
+  padding-top: 2.5rem;
   padding-bottom: 5rem;
 }
 .substrate {
@@ -52,10 +48,10 @@ body {
 .caption {
   color: #29528F;
   font-family: "Yu Mincho Light", serif;
-  font-size: 4em;
+  font-size: 79px;
   line-height: 1.7;
   margin-top: 1.5rem;
-  padding-top: 3vmin;
+  padding-top: 6vmin;
 }
 .blur {
   -webkit-filter: blur(5px);
