@@ -333,7 +333,7 @@ export default {
       this.state=State.RECOGNITION
       // console.log('upload', this.images)
       // Detection image api
-      // axios.post('localhost:5000/predict', { data: this.images }).then(response => {
+      // axios.post('http://localhost:5000/predict', { data: this.images }).then(response => {
       //   this.isUploading = false
       //   // console.log(response)
       //   if(true) {
