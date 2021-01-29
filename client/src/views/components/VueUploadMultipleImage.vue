@@ -113,11 +113,6 @@
           class="btn btn-primary"
           v-on:click="set">確定</button>
       <button
-          v-if="state===State.RECOGNITION_IDLE"
-          type="button"
-          class="btn btn-primary"
-          v-on:click="detect">認識</button>
-      <button
           v-if="state===State.RECOGNITION_RESULT"
           type="button"
           class="btn btn-primary"
@@ -311,14 +306,17 @@ export default {
     },
     upload() {
       this.state=State.IMAGE_UPLOADING
-      console.log('upload', this.images)
       // Upload image api
       let image = this.formData
-      axios.post('http://localhost/api/predict', { image }).then(response => {
-        // console.log(response)
+      axios.post('http://localhost/api/predict', image, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }}).then(response => {
+        console.log(response)
+        console.log(response.status)
         if(true) {
-          console.log("成功")
-          this.state=State.RECOGNITION_IDLE
+          console.log("アップロード成功")
+          this.state=State.RECOGNITION_RESULT
         }
         else {
           console.log("失敗")
@@ -328,53 +326,40 @@ export default {
           }, 2000)
         }
       })
-      //FOR TEST
-      setTimeout(() => {
-      if(true) {
-        console.log("成功")
-        this.state=State.RECOGNITION_IDLE
-      }
-      else {
-        console.log("失敗")
-        this.state=State.IMAGE_UPLOADING_FAILED
-        setTimeout(() => {
-            this.state = State.IMAGE_SELECTED
-           }, 2000)
-      } }, 2000);
     },
-    detect() {
-      this.state=State.RECOGNITION
-      console.log('upload', this.images)
-      // Detection image api
-      axios.post('localhost:5000/predict', { data: this.images }).then(response => {
-        this.isUploading = false
-        // console.log(response)
-        if(true) {
-          console.log("成功")
-          this.state=State.RECOGNITION_RESULT
-        }
-        else {
-          console.log("失敗")
-          this.state=State.RECOGNITION_FAILED
-              setTimeout(() => {
-                this.state=State.RECOGNITION_IDLE
-              }, 2000)
-        }
-      })
-      //FOR TEST
-      // setTimeout(() => {
-      //   if(true) {
-      //     console.log("成功")
-      //     this.state=State.RECOGNITION_RESULT
-      //   }
-      //   else {
-      //     console.log("失敗")
-      //     this.state=State.RECOGNITION_FAILED
-      //     setTimeout(() => {
-      //       this.state=State.RECOGNITION_IDLE
-      //     }, 2000)
-      //   } }, 2000);
-    },
+    // detect() {
+    //   this.state=State.RECOGNITION
+    //   console.log('upload', this.images)
+    //   // Detection image api
+    //   axios.post('localhost:5000/predict', { data: this.images }).then(response => {
+    //     this.isUploading = false
+    //     // console.log(response)
+    //     if(true) {
+    //       console.log("成功")
+    //       this.state=State.RECOGNITION_RESULT
+    //     }
+    //     else {
+    //       console.log("失敗")
+    //       this.state=State.RECOGNITION_FAILED
+    //           setTimeout(() => {
+    //             this.state=State.RECOGNITION_IDLE
+    //           }, 2000)
+    //     }
+    //   })
+    //   //FOR TEST
+    //   // setTimeout(() => {
+    //   //   if(true) {
+    //   //     console.log("成功")
+    //   //     this.state=State.RECOGNITION_RESULT
+    //   //   }
+    //   //   else {
+    //   //     console.log("失敗")
+    //   //     this.state=State.RECOGNITION_FAILED
+    //   //     setTimeout(() => {
+    //   //       this.state=State.RECOGNITION_IDLE
+    //   //     }, 2000)
+    //   //   } }, 2000);
+    // },
     set() {
       this.state=State.RESULT
     },
@@ -382,7 +367,7 @@ export default {
       this.state=State.RERECOGNITION
       setTimeout(() => {
         if(true) {
-          console.log("成功")
+          console.log("redetect成功")
           this.state=State.RERECOGNITION_RESULT
         }
         else {
