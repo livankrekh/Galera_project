@@ -10,6 +10,7 @@ api = Blueprint('api', __name__)
 
 @api.route('/predict', methods=['POST'])
 def predict():
+
     file = request.files['file']
     img_bytes = file.read()
     _, class_name = get_prediction(image_bytes=img_bytes)
