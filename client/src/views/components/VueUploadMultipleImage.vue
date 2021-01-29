@@ -1,8 +1,12 @@
 <template>
-  <div style="outline: none;">
+  <div style="outline: none;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;" class="px-3 pb-4">
     <div class="d-flex flex-row">
       <!--Select file button-->
-        <button class="btn btn-primary"
+        <button class="btn btn-primary btn-big"
                 @click="onPickFile"
                 v-if="state === State.IDLE">ファイルを選択</button>
       <!--Image-->
@@ -597,6 +601,12 @@ export default {
   border: 1px solid #d6d6d6;
   border-radius: 4px;
   background-color: #fff;
+}
+.btn-big {
+  width: 260px;
+  height: 75px;
+  font-size: 28px;
+  margin-top: 100px;
 }
 .image-center {
   width: 100%;

@@ -23,7 +23,7 @@ export default {
   margin:auto;
 }
 .logo-img {
-  width: 233px;
-  height: 50px;
+  width: 159px;
+  height: 34px;
 }
 </style>
