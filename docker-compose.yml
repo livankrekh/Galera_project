@@ -22,7 +22,7 @@ services:
       - postgres
     environment:
       - DATABASE_URL=postgres://postgres:postgres@postgres:5432/postgres
-      - FLASK_ENV=development
+      - FLASK_ENV=production
     networks:
       - local
 
