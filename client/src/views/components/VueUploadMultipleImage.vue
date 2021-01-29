@@ -362,19 +362,19 @@ export default {
       this.state=State.RECOGNITION
       console.log('upload', this.images)
       // Detection image api
-      axios.post('localhost:5000/predict', { data: this.images }).then(response => {
-        this.isUploading = false
-        // console.log(response)
-        if(true) {
-          console.log("成功")
-          this.isUploadState = false
-          this.isDetectionState = true
-        }
-        else {
-          console.log("失敗")
-          this.isBadUpload = true
-        }
-      })
+      // axios.post('http://localhost:5000/predict', { data: this.images }).then(response => {
+      //   this.isUploading = false
+      //   // console.log(response)
+      //   if(true) {
+      //     console.log("成功")
+      //     this.isUploadState = false
+      //     this.isDetectionState = true
+      //   }
+      //   else {
+      //     console.log("失敗")
+      //     this.isBadUpload = true
+      //   }
+      // })
       //FOR TEST
       setTimeout(() => {
         if(true) {
