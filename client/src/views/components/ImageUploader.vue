@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import VueUploadMultipleImage from './VueUploadMultipleImage.vue'
+
 // eslint-disable-next-line no-unused-vars
 import axios from 'axios'
 

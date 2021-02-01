@@ -14,16 +14,17 @@ export default {
 </script>
 <style>
 .header {
-  padding-top: 1rem;
+  padding-top: 2.325vmin;
   position: absolute;
   text-align: center;
   width: 100%;
+  z-index: 100;
 }
 .logo {
   margin:auto;
 }
 .logo-img {
-  width: 159px;
-  height: 34px;
+  width: 21.6vmin;
+  height: 4.6vmin;
 }
 </style>
